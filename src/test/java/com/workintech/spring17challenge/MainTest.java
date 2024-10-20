@@ -1,9 +1,9 @@
 package com.workintech.spring17challenge;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.workintech.spring17challenge.entity.*;
 import com.workintech.spring17challenge.exceptions.ApiErrorResponse;
 import com.workintech.spring17challenge.exceptions.ApiException;
+import com.workintech.spring17challenge.model.*;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -217,20 +217,20 @@ class MainTest {
         assertEquals(expectedTimestamp, errorResponse.getTimestamp(), "The timestamp should match the expected value.");
     }
 
-
     @Test
-    void testZooExceptionCreation() {
+    void testApiExceptionCreation() {
         String expectedMessage = "Test exception message";
         HttpStatus expectedStatus = HttpStatus.NOT_FOUND;
 
+        // ApiException sınıfı test ediliyor
         ApiException exception = new ApiException(expectedMessage, expectedStatus);
 
-
+        // Beklenen sonuçlar ile karşılaştırılıyor
         assertEquals(expectedMessage, exception.getMessage(), "The exception message should match the expected value.");
         assertEquals(expectedStatus, exception.getHttpStatus(), "The HttpStatus should match the expected value.");
 
-
-        assertTrue(exception instanceof RuntimeException, "ZooException should be an instance of RuntimeException.");
+        // ApiException'ın RuntimeException sınıfından türediği doğrulanıyor
+        assertTrue(exception instanceof RuntimeException, "ApiException should be an instance of RuntimeException.");
     }
 
     @Test
